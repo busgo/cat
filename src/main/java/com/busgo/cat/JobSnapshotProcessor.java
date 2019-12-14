@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -67,7 +68,7 @@ public class JobSnapshotProcessor {
     }
 
 
-    public JobSnapshotProcessor withJobList(ConcurrentHashMap<String, Job> jobList) {
+    public JobSnapshotProcessor withJobList(Map<String, Job> jobList) {
 
         if (jobList == null || jobList.isEmpty()) return this;
 

@@ -11,8 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.Map;
 
 /**
  * @author busgo
@@ -52,13 +53,13 @@ public class ForestClient implements StreamObserver<LeaseKeepAliveResponse> {
     private String jobSnapshotPath;
 
     // 核心线程数
-    private int corePoolSize = Runtime.getRuntime().availableProcessors() * 8;
+    private int corePoolSize = Runtime.getRuntime().availableProcessors() * 4;
 
-    // 任务队列容量
+    // 任务量大小
     private int capacity = 50;
 
     // 具体执行任务列表
-    private ConcurrentHashMap<String, Job> jobs = new ConcurrentHashMap<>();
+    private Map<String, Job> jobs = new HashMap<>();
 
 
     // 任务是否已注册
@@ -254,11 +255,11 @@ public class ForestClient implements StreamObserver<LeaseKeepAliveResponse> {
     }
 
 
-    public ConcurrentHashMap<String, Job> getJobs() {
+    public Map<String, Job> getJobs() {
         return jobs;
     }
 
-    public void setJobs(ConcurrentHashMap<String, Job> jobs) {
+    public void setJobs(Map<String, Job> jobs) {
         this.jobs = jobs;
     }
 
