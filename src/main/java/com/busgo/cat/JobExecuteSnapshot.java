@@ -42,13 +42,13 @@ public class JobExecuteSnapshot implements Serializable {
     private String remark;
 
     //创建时间
-    private Date createTime;
+    private String createTime;
 
     // 开始时间
-    private Date startTime;
+    private String startTime;
 
     // 结束时间
-    private Date finishTime;
+    private String finishTime;
 
     // 状态
     private Integer status;
@@ -140,27 +140,27 @@ public class JobExecuteSnapshot implements Serializable {
         this.remark = remark;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getFinishTime() {
+    public String getFinishTime() {
         return finishTime;
     }
 
-    public void setFinishTime(Date finishTime) {
+    public void setFinishTime(String finishTime) {
         this.finishTime = finishTime;
     }
 

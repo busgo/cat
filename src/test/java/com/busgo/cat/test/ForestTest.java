@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -48,7 +49,7 @@ public class ForestTest {
 
             JobSnapshot snapshot = new JobSnapshot();
             snapshot.setId(UUID.randomUUID().toString());
-            snapshot.setCreateTime(new Date());
+            snapshot.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             snapshot.setCron("0 0 * * * ?");
             snapshot.setGroup(group);
             snapshot.setIp(ip);
@@ -60,7 +61,7 @@ public class ForestTest {
             snapshot.setRemark("测试任务备注");
             String content = JSON.toJSONString(snapshot);
             etcdClient.putWithKey(jobSnapshotPath + snapshot.getId(), content);
-            log.info("插入任务快照数据:{}", content);
+            System.err.println(content);//("插入任务快照数据:{}", );
         }
 
 
@@ -70,14 +71,14 @@ public class ForestTest {
     public void test() throws Exception {
 
 
-        ForestClient forestClient = new ForestClient("http://localhost:2379", "trade", "127.0.0.1");
-
-        System.err.println(forestClient);
-        ConcurrentHashMap<String, Job> jobs = new ConcurrentHashMap<>();
-        jobs.put("com.busgo.cat.job.EchoJob", new EchoJob());
-        forestClient.setJobs(jobs);
-
-        forestClient.start();
+//        ForestClient forestClient = new ForestClient("http://localhost:2379", "trade", "127.0.0.1");
+//
+//        System.err.println(forestClient);
+//        ConcurrentHashMap<String, Job> jobs = new ConcurrentHashMap<>();
+//        jobs.put("com.busgo.cat.job.EchoJob", new EchoJob());
+//        forestClient.setJobs(jobs);
+//
+//        forestClient.start();
 
 
         System.in.read();

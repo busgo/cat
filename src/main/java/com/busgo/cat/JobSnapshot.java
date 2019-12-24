@@ -3,6 +3,7 @@ package com.busgo.cat;
 import com.alibaba.fastjson.JSON;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -42,7 +43,7 @@ public class JobSnapshot implements Serializable {
     private String remark;
 
     //创建时间
-    private Date createTime;
+    private String createTime;
 
 
     public String getId() {
@@ -125,14 +126,13 @@ public class JobSnapshot implements Serializable {
         this.remark = remark;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
-
 
     @Override
     public String toString() {
@@ -157,7 +157,7 @@ public class JobSnapshot implements Serializable {
 
         JobSnapshot snapshot = new JobSnapshot();
         snapshot.setId("110");
-        snapshot.setCreateTime(new Date());
+        snapshot.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         snapshot.setCron("0 0 * * * ?");
         snapshot.setGroup("trade");
         snapshot.setIp("127.0.0.1");

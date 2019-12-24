@@ -7,6 +7,7 @@ import com.busgo.cat.job.Job;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.*;
@@ -156,7 +157,7 @@ public class JobSnapshotProcessor {
         executeSnapshot.setRemark(jobSnapshot.getRemark());
         executeSnapshot.setTimes(0L);
         executeSnapshot.setCron(jobSnapshot.getCron());
-        executeSnapshot.setStartTime(new Date());
+        executeSnapshot.setStartTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         executeSnapshot.setCreateTime(jobSnapshot.getCreateTime());
         executeSnapshot.setStatus(JobExecuteStatus.JobExecuteDoingStatus);
 
@@ -228,9 +229,12 @@ public class JobSnapshotProcessor {
 
                 String result = job.execute(params);
                 Date finishTime = new Date();
-                long times = finishTime.getTime() - this.snapshot.getStartTime().getTime();
+
+
+                long times = finishTime.getTime() - new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(this.snapshot.getStartTime()).getTime();
                 this.snapshot.setTimes(times / 1000);
                 this.snapshot.setResult(result);
+                this.snapshot.setFinishTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(finishTime));
                 this.snapshot.setStatus(JobExecuteStatus.JobExecuteSuccessStatus);
                 // update  job execute snapshot
                 etcdClient.putWithKey(path, JSON.toJSONString(this.snapshot));
